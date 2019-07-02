@@ -54,4 +54,29 @@ void listUser(struct user* u){
 
 void saveUser(struct user* u){
     // TODO save
+    // TODO save
+    int e = EXIT_SUCCESS;
+    /* Get path from argument to main else default to output.txt */
+    char *path = FILENAME;
+    /* Open file for writing and obtain file pointer */
+    FILE *file = fopen(path, "w");
+    /* Print error message and exit if fopen() failed */
+    if (!file)
+    {
+    perror(path);
+    return EXIT_FAILURE;
+    }
+    /* Writes text to file. Unlike puts(), fputs() does not add a new-line. */
+    if (fputs("Output in file.\n", file) == EOF)
+    {
+    perror(path);
+    e = EXIT_FAILURE;
+    }
+    /* Close file */
+    if (fclose(file))
+    {
+    perror(path);
+    return EXIT_FAILURE;
+    }
+    return e;
 }
